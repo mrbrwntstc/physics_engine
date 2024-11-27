@@ -11,7 +11,8 @@ GLM_INCLUDE="$(brew --prefix glm)/include"
 GLFW_INCLUDE="$(brew --prefix glfw)/include"
 GLFW_LIBS="$(brew --prefix glfw)/lib"
 
-ENGINE_SRC_FILES="engine/window_glfw.cpp"
+ENGINE_RENDER_SRC_FILES="engine/render_opengl/render.cpp engine/render_opengl/shader.cpp engine/render_opengl/shapes.cpp"
+ENGINE_SRC_FILES="engine/window_glfw.cpp engine/engine.cpp ${ENGINE_RENDER_SRC_FILES}"
 SRC_FILES="${PROJECT_DIR}/main.cpp ${ENGINE_SRC_FILES} ${GLAD_SRC}"
 EXE_NAME="engine"
 
