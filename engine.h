@@ -1,7 +1,10 @@
 #ifndef __ENGINE_PHYSICS_ENGINE__
 #define __ENGINE_PHYSICS_ENGINE__
 
+#define GLAD_GL_IMPLEMENTATION
 #include <glad/glad.h>
+#define GLFW_INCLUDE_NONE
+#include <GLFW/glfw3.h>
 
 #include <iostream>
 
@@ -38,14 +41,14 @@ namespace triangle
 {
   void init();
   void cleanup();
-  void draw(glm::vec2 pos, glm::vec2 size);
+  void draw(glm::vec2 pos, glm::vec2 size, glm::vec3 color);
 }
 
 namespace circle
 {
   void init();
   void cleanup();
-  void draw(glm::vec2, glm::vec2 size);
+  void draw(glm::vec2, glm::vec2 size, glm::vec3 color);
 }
 
   void init();

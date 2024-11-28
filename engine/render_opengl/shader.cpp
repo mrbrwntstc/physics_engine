@@ -19,9 +19,10 @@ namespace shader
   static const char *source_fragment = 
     "#version 330 core\n"
     "out vec4 FragColor;\n"
+    "uniform vec3 color;\n"
     "void main()\n"
     "{\n"
-    "   FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n"
+    "   FragColor = vec4(color, 1.0);\n"
     "}\n\0";
   
   unsigned int program;

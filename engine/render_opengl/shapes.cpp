@@ -15,7 +15,7 @@ static void init_state(unsigned int* vao, unsigned int* vbo, float* vertices, in
 }
 
 template <GLenum primitive_opengl>
-void draw_shape(glm::vec2 pos, glm::vec2 size, unsigned int *vao, int num_vertices)
+void draw_shape(glm::vec2 pos, glm::vec2 size, glm::vec3 color, unsigned int *vao, int num_vertices)
 {
   // matrix transformations
   // ---
@@ -23,6 +23,11 @@ void draw_shape(glm::vec2 pos, glm::vec2 size, unsigned int *vao, int num_vertic
   mat4_model = glm::translate(mat4_model, glm::vec3(pos, 0.0f));
   mat4_model = glm::scale(mat4_model, glm::vec3(size, 1.0f));
   glUniformMatrix4fv(glGetUniformLocation(engine::render::shader::program, "model"), 1, GL_FALSE, glm::value_ptr(mat4_model));
+  // ---
+
+  // color
+  // ---
+  glUniform3fv(glGetUniformLocation(engine::render::shader::program, "color"), 1, glm::value_ptr(color));
   // ---
 
   // render
@@ -55,9 +60,9 @@ namespace triangle
     glDeleteVertexArrays(1, &vao);
     glDeleteBuffers(1, &vbo);
   }
-  void draw(glm::vec2 pos, glm::vec2 size)
+  void draw(glm::vec2 pos, glm::vec2 size, glm::vec3 color)
   {
-    draw_shape<GL_TRIANGLES>(pos, size, &vao, 3);
+    draw_shape<GL_TRIANGLES>(pos, size, color, &vao, 3);
   }
 }
 
@@ -95,9 +100,9 @@ namespace circle
     glDeleteVertexArrays(1, &vao);
     glDeleteBuffers(1, &vbo);
   }
-  void draw(glm::vec2 pos, glm::vec2 size)
+  void draw(glm::vec2 pos, glm::vec2 size, glm::vec3 color)
   {
-    draw_shape<GL_TRIANGLE_FAN>(pos, size, &vao, num_vertices);
+    draw_shape<GL_TRIANGLE_FAN>(pos, size, color, &vao, num_vertices);
   }
 }
 }
