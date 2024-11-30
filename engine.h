@@ -48,7 +48,7 @@ namespace circle
 {
   void init();
   void cleanup();
-  void draw(glm::vec2, glm::vec2 size, glm::vec3 color);
+  void draw(glm::vec2, float radius, glm::vec3 color);
 }
 
   void init();

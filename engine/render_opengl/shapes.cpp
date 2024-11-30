@@ -100,9 +100,9 @@ namespace circle
     glDeleteVertexArrays(1, &vao);
     glDeleteBuffers(1, &vbo);
   }
-  void draw(glm::vec2 pos, glm::vec2 size, glm::vec3 color)
+  void draw(glm::vec2 pos, float radius, glm::vec3 color)
   {
-    draw_shape<GL_TRIANGLE_FAN>(pos, size, color, &vao, num_vertices);
+    draw_shape<GL_TRIANGLE_FAN>(pos, glm::vec2(radius, radius), color, &vao, num_vertices);
   }
 }
 }
