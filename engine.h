@@ -58,6 +58,29 @@ namespace circle
 
 namespace engine
 {
+namespace physics
+{
+  enum class shape_type { circle };
+  struct rigid_body
+  {
+    shape_type shape;
+    union
+    { // I need one or the other, but never both
+      float radius;
+      struct {
+        float length;
+        float width;
+      };
+    };
+    glm::vec2 position;
+  };
+
+  rigid_body rigid_body_circle(float radius, glm::vec2 position_center);
+}
+}
+
+namespace engine
+{
   void init();
   void cleanup();
 }
