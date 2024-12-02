@@ -18,6 +18,7 @@ namespace window
 {
   constexpr int width = 640;
   constexpr int height = 480;
+  extern GLFWwindow* handle;
   void init();
   void cleanup();
   bool should_close();
