@@ -1,4 +1,4 @@
-#include "../engine.h"
+#include "../../engine.h"
 
 namespace callbacks_glfw
 {
@@ -43,6 +43,8 @@ namespace window
     glfwSetFramebufferSizeCallback(handle, callbacks_glfw::framebuffer_size);
     gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
     glfwSwapInterval(1);
+  
+    keyboard::init();
   }
 
   void cleanup()

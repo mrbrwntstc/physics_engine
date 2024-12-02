@@ -16,6 +16,17 @@ namespace engine
 {
 namespace window
 {
+namespace keyboard
+{
+  extern bool left;
+  extern bool right;
+  extern bool up;
+  extern bool down;
+  extern bool close_window;
+
+  void init();
+  void update();
+}
   constexpr int width = 640;
   constexpr int height = 480;
   extern GLFWwindow* handle;
