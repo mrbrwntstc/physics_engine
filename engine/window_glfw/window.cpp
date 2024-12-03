@@ -1,9 +1,4 @@
-#define GLAD_GL_IMPLEMENTATION
-#include <glad/glad.h>
-#define GLFW_INCLUDE_NONE
-#include <GLFW/glfw3.h>
-
-#include <iostream>
+#include "../../engine.h"
 
 namespace callbacks_glfw
 {
@@ -22,7 +17,7 @@ namespace engine
 {
 namespace window
 {
-  static GLFWwindow *ptr_window;
+  GLFWwindow *handle;
 
   void init()
   {
@@ -38,27 +33,29 @@ namespace window
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
   #endif
 
-    ptr_window = glfwCreateWindow(640, 480, "Physics Engine", NULL, NULL);
-    if (!ptr_window)
+    handle = glfwCreateWindow(640, 480, "Physics Engine", NULL, NULL);
+    if (!handle)
     {
       glfwTerminate();
       exit(EXIT_FAILURE);
     }
-    glfwMakeContextCurrent(ptr_window);
-    glfwSetFramebufferSizeCallback(ptr_window, callbacks_glfw::framebuffer_size);
+    glfwMakeContextCurrent(handle);
+    glfwSetFramebufferSizeCallback(handle, callbacks_glfw::framebuffer_size);
     gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
     glfwSwapInterval(1);
+  
+    keyboard::init();
   }
 
   void cleanup()
   {
-    glfwDestroyWindow(ptr_window);
+    glfwDestroyWindow(handle);
     glfwTerminate();
   }
 
   bool should_close()
   {
-    return glfwWindowShouldClose(ptr_window);
+    return glfwWindowShouldClose(handle);
   }
 
   void clear_screen(float r, float g, float b, float a)
@@ -69,7 +66,7 @@ namespace window
 
   void flush()
   {
-    glfwSwapBuffers(ptr_window);
+    glfwSwapBuffers(handle);
     glfwPollEvents();
   }
 
