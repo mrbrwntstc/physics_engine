@@ -1,9 +1,39 @@
 #include "engine.h"
 
+namespace collisions
+{
+  struct result
+  {
+    glm::vec2 direction;
+    float depth;
+    bool collision_occured;
+  };
+
+  result circle_circle(glm::vec2 center_other, float radius_other, glm::vec2 center_self, float radius_self)
+  {
+    result result_collision;
+
+    float distance_centers = glm::distance(center_other, center_self);
+    float radii = radius_other + radius_self;
+
+    if(distance_centers >= radii)
+      result_collision.collision_occured = false;
+    else
+    {
+      result_collision.collision_occured = true;
+      result_collision.direction = glm::normalize(center_self - center_other);
+      result_collision.depth = radii - distance_centers;
+    }
+
+    return result_collision;
+  }
+}
+
 int main()
 {
   engine::init();
-  engine::physics::rigid_body circle = engine::physics::rigid_body_circle(10, glm::vec2(200,50));
+  engine::physics::rigid_body circle = engine::physics::rigid_body_circle(10, glm::vec2(250,50));
+  engine::physics::rigid_body circle2 = engine::physics::rigid_body_circle(10, glm::vec2(600,200));
 
   while (!engine::window::should_close())
   {
@@ -25,10 +55,18 @@ int main()
       circle.position += velocity;
     }
 
+    collisions::result result = collisions::circle_circle(circle2.position, circle2.radius, circle.position, circle.radius);
+    if(result.collision_occured)
+    {
+      circle2.position += (-result.direction * result.depth / 2.f);
+      circle.position += (result.direction * result.depth / 2.f);
+    }
+
     engine::window::clear_screen();
 
     engine::render::triangle::draw(glm::vec2(400, 200), glm::vec2(10, 10), glm::vec3(1,0,0));
     engine::render::circle::draw(circle.position, circle.radius, glm::vec3(0,1,0));
+    engine::render::circle::draw(circle2.position, circle2.radius, glm::vec3(1, 1, 0));
 
     engine::window::flush();
   }
