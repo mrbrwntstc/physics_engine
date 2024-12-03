@@ -11,7 +11,7 @@ GLM_INCLUDE="$(brew --prefix glm)/include"
 GLFW_INCLUDE="$(brew --prefix glfw)/include"
 GLFW_LIBS="$(brew --prefix glfw)/lib"
 
-ENGINE_PHYSICS_SRC_FILES="engine/physics/rigid_body.cpp"
+ENGINE_PHYSICS_SRC_FILES="engine/physics/rigid_body.cpp engine/physics/collisions.cpp"
 ENGINE_RENDER_SRC_FILES="engine/render_opengl/render.cpp engine/render_opengl/shader.cpp engine/render_opengl/shapes.cpp"
 ENGINE_WINDOW_SRC_FILES="engine/window_glfw/keyboard.cpp engine/window_glfw/window.cpp"
 ENGINE_SRC_FILES="engine/engine.cpp ${ENGINE_WINDOW_SRC_FILES} ${ENGINE_RENDER_SRC_FILES} ${ENGINE_PHYSICS_SRC_FILES}"

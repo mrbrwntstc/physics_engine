@@ -72,6 +72,17 @@ namespace engine
 {
 namespace physics
 {
+namespace collisions
+{
+  struct result
+  {
+    glm::vec2 direction;
+    float depth;
+    bool collision_occured;
+  };
+
+  result circle_circle(glm::vec2 center_other, float radius_other, glm::vec2 center_self, float radius_self);
+}
   enum class shape_type { circle };
   struct rigid_body
   {

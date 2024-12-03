@@ -1,34 +1,5 @@
 #include "engine.h"
 
-namespace collisions
-{
-  struct result
-  {
-    glm::vec2 direction;
-    float depth;
-    bool collision_occured;
-  };
-
-  result circle_circle(glm::vec2 center_other, float radius_other, glm::vec2 center_self, float radius_self)
-  {
-    result result_collision;
-
-    float distance_centers = glm::distance(center_other, center_self);
-    float radii = radius_other + radius_self;
-
-    if(distance_centers >= radii)
-      result_collision.collision_occured = false;
-    else
-    {
-      result_collision.collision_occured = true;
-      result_collision.direction = glm::normalize(center_self - center_other);
-      result_collision.depth = radii - distance_centers;
-    }
-
-    return result_collision;
-  }
-}
-
 int main()
 {
   engine::init();
@@ -55,7 +26,7 @@ int main()
       circle.position += velocity;
     }
 
-    collisions::result result = collisions::circle_circle(circle2.position, circle2.radius, circle.position, circle.radius);
+    engine::physics::collisions::result result = engine::physics::collisions::circle_circle(circle2.position, circle2.radius, circle.position, circle.radius);
     if(result.collision_occured)
     {
       circle2.position += (-result.direction * result.depth / 2.f);
