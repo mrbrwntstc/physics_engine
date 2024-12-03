@@ -63,6 +63,13 @@ namespace circle
   void draw(glm::vec2, float radius, glm::vec3 color);
 }
 
+namespace quad
+{
+  void init();
+  void cleanup();
+  void draw(glm::vec2 top_left, float length, float width, glm::vec3 color);
+}
+
   void init();
   void cleanup();
 }

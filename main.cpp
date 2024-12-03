@@ -38,7 +38,7 @@ int main()
     engine::render::triangle::draw(glm::vec2(400, 200), glm::vec2(10, 10), glm::vec3(1,0,0));
     engine::render::circle::draw(circle.position, circle.radius, glm::vec3(0,1,0));
     engine::render::circle::draw(circle2.position, circle2.radius, glm::vec3(1, 1, 0));
-
+    engine::render::quad::draw(glm::vec2(375, 225), 10, 10, glm::vec3(1, 0, 1));
     engine::window::flush();
   }
  

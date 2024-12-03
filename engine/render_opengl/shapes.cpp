@@ -105,5 +105,37 @@ namespace circle
     draw_shape<GL_TRIANGLE_FAN>(pos, glm::vec2(radius, radius), color, &vao, num_vertices);
   }
 }
+
+namespace quad
+{
+  unsigned int vao;
+  unsigned int vbo;
+  void init()
+  {
+    float vertices[] = 
+    {
+      0.0, 1.0, // top left
+      1.0, 1.0, // top right
+      1.0, 0.0, // bottom right
+
+      0.0, 1.0, // top left
+      1.0, 0.0, // bottom right
+      0.0, 0.0  // bottom left
+    };
+
+    init_state(&vao, &vbo, vertices, 12);
+  }
+
+  void cleanup()
+  {
+    glDeleteVertexArrays(1, &vao);
+    glDeleteBuffers(1, &vbo);
+  }
+
+  void draw(glm::vec2 top_left, float length, float width, glm::vec3 color)
+  {
+    draw_shape<GL_TRIANGLES>(top_left, glm::vec2(length, width), color, &vao, 12);
+  }
+}
 }
 }

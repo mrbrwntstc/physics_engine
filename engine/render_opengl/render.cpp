@@ -9,10 +9,12 @@ namespace render
     shader::init();
     triangle::init();
     circle::init();
+    quad::init();
   }
 
   void cleanup()
   {
+    quad::cleanup();
     circle::cleanup();
     triangle::cleanup();
     shader::cleanup();
