@@ -67,7 +67,7 @@ namespace quad
 {
   void init();
   void cleanup();
-  void draw(glm::vec2 top_left, float length, float width, glm::vec3 color);
+  void draw(glm::vec2 top_left, glm::vec2 size, glm::vec3 color);
 }
 
   void init();
@@ -90,7 +90,7 @@ namespace collisions
 
   result circle_circle(glm::vec2 center_other, float radius_other, glm::vec2 center_self, float radius_self);
 }
-  enum class shape_type { circle };
+  enum class shape_type { circle, quad };
   struct rigid_body
   {
     shape_type shape;
@@ -106,6 +106,7 @@ namespace collisions
   };
 
   rigid_body rigid_body_circle(float radius, glm::vec2 position_center);
+  rigid_body rigid_body_quad(float length, float width, glm::vec2 top_left);
 }
 }
 

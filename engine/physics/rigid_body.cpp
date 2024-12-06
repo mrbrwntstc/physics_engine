@@ -13,5 +13,16 @@ namespace physics
 
     return circle;
   }
+
+  rigid_body rigid_body_quad(float width, float length, glm::vec2 top_left)
+  {
+    rigid_body quad;
+    quad.shape = shape_type::quad;
+    quad.width = width;
+    quad.length = length;
+    quad.position = top_left;
+
+    return quad;
+  }
 }
 }

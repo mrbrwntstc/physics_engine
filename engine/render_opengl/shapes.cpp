@@ -19,10 +19,15 @@ void draw_shape(glm::vec2 pos, glm::vec2 size, glm::vec3 color, unsigned int *va
 {
   // matrix transformations
   // ---
-  glm::mat4 mat4_model = glm::mat4(1.0);
-  mat4_model = glm::translate(mat4_model, glm::vec3(pos, 0.0f));
-  mat4_model = glm::scale(mat4_model, glm::vec3(size, 1.0f));
-  glUniformMatrix4fv(glGetUniformLocation(engine::render::shader::program, "model"), 1, GL_FALSE, glm::value_ptr(mat4_model));
+  glm::mat4 model = glm::mat4(1.0);
+  model = glm::translate(model, glm::vec3(pos, 0.0f));
+
+  model = glm::translate(model, glm::vec3(0.5 * size.x, 0.5 * size.y, 0.0f));
+  model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(0, 0, 1));
+  model = glm::translate(model, glm::vec3(-0.5 * size.x, -0.5 * size.y, 0.0f));
+
+  model = glm::scale(model, glm::vec3(size, 1.0f));
+  glUniformMatrix4fv(glGetUniformLocation(engine::render::shader::program, "model"), 1, GL_FALSE, glm::value_ptr(model));
   // ---
 
   // color
@@ -132,9 +137,9 @@ namespace quad
     glDeleteBuffers(1, &vbo);
   }
 
-  void draw(glm::vec2 top_left, float length, float width, glm::vec3 color)
+  void draw(glm::vec2 top_left, glm::vec2 size, glm::vec3 color)
   {
-    draw_shape<GL_TRIANGLES>(top_left, glm::vec2(length, width), color, &vao, 12);
+    draw_shape<GL_TRIANGLES>(top_left, size, color, &vao, 12);
   }
 }
 }
